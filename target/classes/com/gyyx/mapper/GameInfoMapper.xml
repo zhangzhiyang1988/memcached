@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.gyyx.mapper.GameInfoMapper"> 
+	<resultMap id="GameInfoResult"  type="GameInfo" >
+		<result property="code" column="code" javaType="String" />		
+		<result property="name" column="name" javaType="String" />		
+	</resultMap>	
+    <!-- 这里的id必须和UserMapper接口中的接口方法名相同，不然运行的时候也要报错 --> 
+    <select id="getGameInfo" resultType="GameInfo" parameterType="java.lang.String"> 
+        select * from gaoshuangwu_game_tb 
+    </select>
+    
+    <update id="updateGameName" parameterType="map" >
+    	update gaoshuangwu_game_tb set name = #{name} where code = #{code}
+    </update> 
+</mapper> 

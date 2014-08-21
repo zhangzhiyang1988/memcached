@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.gyyx.mapper.ServerInfoMapper"> 
+
+	<resultMap id="ServerInfoResult"  type="ServerInfo" >
+		<result property="code" column="code" javaType="String" />		
+		<result property="gameId" column="gameId" javaType="String" />		
+		<result property="gameName" column="gameName" javaType="String" />		
+	</resultMap>	
+    <!-- 这里的id必须和UserMapper接口中的接口方法名相同，不然运行的时候也要报错 --> 
+    <select id="queryListByGameId" resultMap="ServerInfoResult" parameterType="java.lang.String"> 
+        select * from gaoshuangwu_game_server_tb where gameId=#{id}
+    </select> 
+    
+     <update id="updateServerName" parameterType="map" >
+    	update gaoshuangwu_game_server_tb set serverName = #{name} where code = #{code}
+    </update> 
+</mapper> 

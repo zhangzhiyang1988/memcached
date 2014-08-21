@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Home</title>
+	<script type="text/javascript" src="resources/scripts/jquery-1.7.1.min.js"></script>
+    </script>
+</head>
+<body>
+	
+<label for="game">游戏：</label>
+<select id="game" onchange="change()">	
+#foreach($item in $games)	
+		<option value="$item.code">$item.name</option>
+#end
+</select> 
+<label for="server">区服：</label>
+<select id="server">
+</select>
+<script type="text/javascript">
+change();
+function change(){
+	var code = $('#game').val();
+	$.get("getServerList", { gameId: code },
+      function(data){
+	 	var  html=''
+      	for(var i=0;i<data.length;i++){
+			html+='<option value="'+data[i].code+'">'+data[i].serverName+'</option>'
+		}
+		$("#server").empty().html(html);
+   	});
+}
+</script>
+</body>
+</html>
